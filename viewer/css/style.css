@@ -1,0 +1,40 @@
+/* ==== PAGE STYLING DEFINITIONS ==== */
+
+/* == Height and position adjustments to accompodate for header navbar and footer bar == */
+html {
+    height: 100%;
+}
+
+body {
+    padding-top: 70px;
+    height: 100%;
+}
+
+/* Style customizations for the footer bar */
+footer {
+    color: #666;
+    background: #f5f5f5;
+    padding: 2px 0 5px 0;
+    font-size: 85%;
+}
+
+/* == Loads the Merriweather and Muli fonts for text == */
+h1, h2, h3, h4, h5 {
+    font-family: 'Merriweather', serif;
+}
+p, ul {
+    font-family: 'Muli', sans-serif;
+}
+
+/* == Adds support for section navigation and styling == */
+/* Compensates for fixed top navbar */
+section {
+    padding-top: 70px;
+    margin-top: -70px;
+}
+
+/* == Adds adjustments for Leaflet == */
+/* Defines a minimum height for the map */
+#map {
+    height: 500px;
+}
