@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex">
+    
+	<title>Atlas Viewer</title>
+    
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather%7CMuli">
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <script async type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script async type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./atlas-viewer.html">Atlas Viewer</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="./atlas-viewer.html#mapview">Interactive Map</a></li>
+            <li><a href="./atlas-viewer.html#stats">Results and Statistics</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+    
+    <div class="container">
+        
+        <!-- Map Section-->
+        <section id="mapview">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1>Interactive Map</h1>
+                <div id="map"></div>
+            </div>
+        </div>
+        </section>
+        
+        
+        <!-- Results and Statistics Section -->
+        <section id="stats">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Results and Statistics</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>Percentage of impressions that fell outside all geofences</p>
+            </div>
+        </div>
+        </section>
+    </div>
+    
+    <footer>
+      <div class="container">
+        <p class="navbar-text text-muted">Built by <a href="//andychu.me" target="_blank">Andy Chu</a> using <a href="//pages.github.com" target="_blank">GitHub Pages</a>, <a href="//getbootstrap.com/" target="_blank">Bootstrap</a>, and <a href="//leafletjs.com/index.html" target="_blank">Leaflet</a>. Check out the <a href="//github.com/DeltaSpark/atlas" target="_blank">source code here</a>.
+      </div>
+    </footer>
+    
+    <script type="text/javascript" src="./js/fences.js"></script>
+    <script type="text/javascript" src="./js/map.js"></script>
+
+</body>
+</html>
