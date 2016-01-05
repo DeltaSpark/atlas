@@ -11,9 +11,6 @@
     
     <link rel="shortcut icon" href="./favicon.ico">
     
-    <script type="text/javascript" src="./js/pace.min.js"></script>
-    <link rel="stylesheet" href="./css/centerloadbar.css">
-    
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Merriweather%7CMuli">
     <link rel="stylesheet" href="./css/style.css">
@@ -21,8 +18,12 @@
     <script async type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script async type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
-    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <link rel="stylesheet" href="./css/leaflet.css">
+    <script type="text/javascript" src="./js/leaflet.js"></script>
+    
+    <link rel="stylesheet" href="./css/markercluster.css">
+    <link rel="stylesheet" href="./css/markercluster.default.css">
+    <script type="text/javascript" src="./js/leaflet.markercluster.js"></script>
 </head>
 
 <body>
@@ -55,12 +56,12 @@
         <section id="mapview">
         <div class="row">
             <div class="col-md-12 text-center">
-                
+                <h1>Interactive Map</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 text-center">
-                <h1>Interactive Map</h1>
+                <div id="progress"><div id="progress-bar"></div></div>
                 <div id="map"></div>
             </div>
         </div>
@@ -89,6 +90,7 @@
     </footer>
     
     <script type="text/javascript" src="./js/fences.js"></script>
+    <script type="text/javascript" src="./js/impressions.three.js"></script>
     <script type="text/javascript" src="./js/map.js"></script>
 
 </body>
