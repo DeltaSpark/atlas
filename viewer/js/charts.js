@@ -61,7 +61,7 @@ $(function () {
             y: 60
         },
         tooltip: {
-            pointFormat: '<b>{point.percentage:.2f}%</b>'
+            pointFormat: '<b>{point.percentage:.2f}% geofences</b>'
         },
         plotOptions: {
             pie: {

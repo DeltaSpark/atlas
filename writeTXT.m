@@ -23,6 +23,8 @@ fclose(fenceFileID);
 % Garbage collection to remove variables local to script
 clear i fenceFileID s stringFences
 
+
+
 % Debug: Notification that impression processing has begun
 disp('Processing impressions...');
 
@@ -48,13 +50,17 @@ disp('Extracting nonzero elements from the clustered data...');
 % Find nonzero elements in the histogram
 [rowIndex, colIndex, values] = find(N);
 
-% Update waitbar message with transition to impressions
+% Open waitbar with progress bar for impressions clustering
 h = waitbar(0,'Converting clustered data into marker strings...');
 
 % Extract values of nonzero elements and convert into strings
 for j = 1:numClusters
-    stringClusters(j) = {sprintf('[%.4f,%.4f,%d]',Xedges(rowIndex(j)), Yedges(colIndex(j)), values(j))};
-    debugClusterMatrix(j,:) = [Xedges(rowIndex(j)), Yedges(colIndex(j)), values(j)];
+    xCoordinate = mean([Xedges(rowIndex(j)), Xedges(rowIndex(j)+1)]);
+    yCoordinate = mean([Yedges(colIndex(j)), Yedges(colIndex(j)+1)]);
+    markerLabel = values(j);
+    
+    stringClusters(j) = {sprintf('[%.4f,%.4f,%d]',xCoordinate, yCoordinate, markerLabel)};
+    debugClusterMatrix(j,:) = [xCoordinate, yCoordinate, markerLabel];
     
     waitbar(j / numClusters, h)
 end
@@ -73,4 +79,4 @@ fprintf(impressionsFileID,s);
 fclose(impressionsFileID);
 
 % Garbage collection to remove variables local to script
-clear j impressionsFileID h binX binY N colIndex rowIndex values s numClusters stringClusters
+clear j impressionsFileID h binX binY N colIndex rowIndex values s numClusters stringClusters xCoordinate yCoordinate markerLabel
