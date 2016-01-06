@@ -26,13 +26,14 @@ clear i fenceFileID s stringFences
 % Debug: Notification that impression processing has begun
 disp('Processing impressions...');
 
-% Setup histogram to include bins every .005 degrees (approx 56 meters) and
-% to count the number of impressions in each bin
+% Setup histogram to define a table across Florida and count the number of 
+% impressions in each cell of the table
 
 % Defines number of bins in the X and Y axis (or lat, lon)
-% binX = (max latitude - min latitude) / .005, rounded to nearest integer
-% binY = (max long - min long) / .005, rounded to nearest integer
-binX = 1391; binY = 1794;
+% Discovered through trial and error, targetting for ~90,000 markers to
+% balance between as high of a resolution as possible while still feasible
+% to draw on map in Chrome
+binX = 3000; binY = 4000;
 
 % Count the number of impressions in each bin, including duplicates
 [N,Xedges,Yedges] = histcounts2(impressions(:,1),impressions(:,2),[binX binY]);
@@ -52,7 +53,7 @@ h = waitbar(0,'Converting clustered data into marker strings...');
 
 % Extract values of nonzero elements and convert into strings
 for j = 1:numClusters
-    stringClusters(j) = {sprintf('[%.3f,%.3f,%d]',Xedges(rowIndex(j)), Yedges(colIndex(j)), values(j))};
+    stringClusters(j) = {sprintf('[%.4f,%.4f,%d]',Xedges(rowIndex(j)), Yedges(colIndex(j)), values(j))};
     debugClusterMatrix(j,:) = [Xedges(rowIndex(j)), Yedges(colIndex(j)), values(j)];
     
     waitbar(j / numClusters, h)
@@ -72,4 +73,4 @@ fprintf(impressionsFileID,s);
 fclose(impressionsFileID);
 
 % Garbage collection to remove variables local to script
-clear j impressionsFileID h binX binY N Xedges Yedges colIndex rowIndex values s numClusters stringClusters
+clear j impressionsFileID h binX binY N colIndex rowIndex values s numClusters stringClusters
