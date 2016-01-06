@@ -1,32 +1,62 @@
-/*var fenceLayer = new L.LayerGroup();
+// Javacsript file that renders that map on Atlas Viewer
 
-for (var i = 0; i < fences.length; i++) {
-    L.circle([fences[i][0],fences[i][1]], fences[i][2],{
-        weight: 0,
-        fillColor: '#f03',
-        fillOpacity: 0.2
-    }).addTo(fenceLayer);
-}
-
-var impressionLayer = new L.LayerGroup();
-
-for (var j = 0; j < impressions.length; j++) {
-    L.marker([impressions[j][0],impressions[j][1]]).addTo(impressionLayer);
-}*/
-
-
+// Stores the attribution and map source for the base layer maps from Mapbox.com
 var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGVsdGFzcGFyayIsImEiOiJjaWl1ejBmMDEwMDJldXNsejBjeHhhanBjIn0.kvUH_d89tMUM9TDoeA5G5w';
 
-/*var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets-basic', attribution: mbAttr}),
+// Defines that streets/grayscale base map layers using the public mapbox tiles
+var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets-basic', attribution: mbAttr}),
     grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
 
+// Creates a new layer group for the geofences
+var fenceLayer = new L.LayerGroup();
+
+for (var i = 0; i < fences.length; i++) {
+    L.circle([fences[i][0],fences[i][1]], fences[i][2],{
+        weight: 0.5,
+        fillColor: '#f03',
+        fillOpacity: 0.05
+    }).addTo(fenceLayer);
+}
+
+// Draws the interactive map with the base layer and geofences
+// Geofences included due to the quick rendering for ~2,000 fences
+// Impressions delayed until after the map draw for improved performance
 var map = L.map('map', {
     center: [27.8333, -81.7170],
     zoom: 6,
-    layers: [streets, fenceLayer, impressionLayer]
+    layers: [streets, fenceLayer]
 });
 
+// Uses the Marker Cluster Group plugin to draw the markers for impressions in a chunked fashion (sets of markers at a time) to prevent browser stall
+var markers = L.markerClusterGroup({chunkedLoading: true});
+
+var markerList = [];
+
+for (var j = 0; j < impressions.length; j++) {
+    var a = impressions[j]
+    var marker = L.marker([a[0],a[1]]);
+    marker.bindPopup(a[2].toString());
+    
+    markerList.push(marker);
+    
+    // Debug console printout to check for infinite loop
+    if (j % 10000 == 0) {
+        console.log('loop milestone passed: ' + j);
+    }
+}
+
+// Debug console print to check for performance at start of clustering
+console.log('start clustering: ' + window.performance.now());
+
+// Adds all impression markers to the map
+markers.addLayers(markerList);
+map.addLayer(markers);
+
+// Debug console print to check for performance at end of clustering
+console.log('end clustering: ' + window.performance.now());
+
+// Adds layer controls to the drawn map to allow for switching base layers, and add/removal of geofences and impressions
 var baseLayers = {
     "Streets": streets,
     "Grayscale": grayscale
@@ -34,48 +64,7 @@ var baseLayers = {
 
 var overlays = {
     "Fences": fenceLayer,
-    "Impressions": impressionLayer
+    "Impressions": markers
 };
 
-L.control.layers(baseLayers, overlays).addTo(map);*/
-
-var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets-basic', attribution: mbAttr});
-
-var map = L.map('map', {
-    center: [27.8333, -81.7170],
-    zoom: 6,
-    layers: [streets]
-});
-
-var progress = document.getElementById('progress');
-var progressBar = document.getElementById('progress-bar');
-
-function updateProgressBar(processed, total, elapsed, layersArray) {
-    progress.style.display = 'block';
-    progressBar.style.width = Math.round(processed/total*100) + '%';
-
-    if (processed === total) {
-        // all markers processed - hide the progress bar:
-        progress.style.display = 'none';
-    }
-}
-
-var markers = L.markerClusterGroup({chunkedLoading: true, chunkProgress: updateProgressBar});
-
-var markerList = [];
-
-for (var j = 0; j < impressions.length; j++) {
-    var a = impressions[j]
-    var marker = L.marker([a[0],a[1]]);
-    
-    markerList.push(marker);
-    
-    if (j % 10000 == 0) {
-        console.log('loop milestone passed: ' + j);
-    }
-}
-
-console.log('start clustering: ' + window.performance.now());
-markers.addLayers(markerList);
-map.addLayer(markers);
-console.log('end clustering: ' + window.performance.now());
+L.control.layers(baseLayers, overlays).addTo(map);
