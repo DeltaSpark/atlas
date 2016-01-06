@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+0<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="./css/markercluster.css">
     <link rel="stylesheet" href="./css/markercluster.default.css">
     <script type="text/javascript" src="./js/leaflet.markercluster.js"></script>
+    
+    <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/highcharts.js"></script>
+    <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/modules/broken-axis.js"></script>
 </head>
 
 <body>
@@ -78,8 +81,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 text-center">
-                <p>Percentage of impressions that fell outside all geofences</p>
+            <div class="col-md-6 col-xs-12 text-center">
+                <div id="percentimpressions" class="chart"></div>
+            </div>
+            <div class="col-md-6 col-xs-12 text-center">
+                <div id="percentfences" class="chart"></div>
+            </div>
+        </div>
+            
+        <div class="row">
+            <div class="col-md-12 col-xs-12 text-center">
+                <div id="barimpressions" class="chart"></div>
             </div>
         </div>
         </section>
@@ -87,13 +99,14 @@
     
     <footer>
       <div class="container">
-        <p class="navbar-text text-muted">Built by <a href="//andychu.me" target="_blank">Andy Chu</a> using <a href="//pages.github.com" target="_blank">GitHub Pages</a>, <a href="//getbootstrap.com/" target="_blank">Bootstrap</a>, <a href="http://github.hubspot.com/pace/docs/welcome/" target="_blank">PACE</a>, <a href="http://leafletjs.com/index.html" target="_blank">Leaflet</a>, and the <a href="//github.com/Leaflet/Leaflet.markercluster/tree/leaflet-0.7" target="_blank">Leaflet.MarkerCluster plugin</a>. Check out the <a href="//github.com/DeltaSpark/atlas" target="_blank">source code here</a>.
+        <p class="navbar-text text-muted">Built by <a href="//andychu.me" target="_blank">Andy Chu</a> using <a href="//pages.github.com" target="_blank">GitHub Pages</a>, <a href="//getbootstrap.com/" target="_blank">Bootstrap</a>, <a href="http://github.hubspot.com/pace/docs/welcome/" target="_blank">PACE</a>, <a href="http://leafletjs.com/index.html" target="_blank">Leaflet</a>, the <a href="//github.com/Leaflet/Leaflet.markercluster/tree/leaflet-0.7" target="_blank">Leaflet.MarkerCluster plugin</a>, and <a href="http://www.highcharts.com/products/highcharts" target="_blank">Highcharts</a>. Check out the <a href="//github.com/DeltaSpark/atlas" target="_blank">source code here</a>.
       </div>
     </footer>
     
     <script type="text/javascript" src="./js/fences.js"></script>
     <script type="text/javascript" src="./js/impressions.js"></script>
     <script type="text/javascript" src="./js/map.js"></script>
+    <script type="text/javascript" src="./js/charts.js"></script>
 
 </body>
 </html>
